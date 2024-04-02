@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Euro Memory</title>
+    <link rel="stylesheet" href="./test.css">
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=aldrich:400|antonio:500" rel="stylesheet" />
+    <script defer src="./script.js"></script>
+</head>
+
+<body>
+    <div class="background">
+        <h1><span>⭐</span> Euro Memo <span>⭐</span></h1>
+        <div class="container">
+            <h2>Veuillez choisir 2 rubriques ci-dessous pour lancer le jeu</h2>
+            <div class="MEPcheckbox">
+                <div class="stylecheckbox">
+                    <input type="checkbox" id="checkboxPays">
+                    <svg viewBox="0 0 35.6 35.6">
+                        <circle class="background" cx="17.8" cy="17.8" r="17.8"></circle>
+                        <circle class="stroke" cx="17.8" cy="17.8" r="14.37"></circle>
+                        <polyline class="check" points="11.78 18.12 15.55 22.23 25.17 12.87"></polyline>
+                    </svg>
+                </div>
+                <label for="checkboxPays">Noms</label>
+                <div class="stylecheckbox">
+                    <input type="checkbox" id="checkboxCapitales">
+                    <svg viewBox="0 0 35.6 35.6">
+                        <circle class="background" cx="17.8" cy="17.8" r="17.8"></circle>
+                        <circle class="stroke" cx="17.8" cy="17.8" r="14.37"></circle>
+                        <polyline class="check" points="11.78 18.12 15.55 22.23 25.17 12.87"></polyline>
+                    </svg>
+                </div>
+                <label for="checkboxCapitales">Capitales</label>
+                <div class="stylecheckbox">
+                    <input type="checkbox" id="checkboxDrapeaux">
+                    <svg viewBox="0 0 35.6 35.6">
+                        <circle class="background" cx="17.8" cy="17.8" r="17.8"></circle>
+                        <circle class="stroke" cx="17.8" cy="17.8" r="14.37"></circle>
+                        <polyline class="check" points="11.78 18.12 15.55 22.23 25.17 12.87"></polyline>
+                    </svg>
+                </div>
+                <label for="checkboxDrapeaux"> Drapeaux </label>
+                <div class="stylecheckbox">
+                    <input type="checkbox" id="checkboxCartes">
+                    <svg viewBox="0 0 35.6 35.6">
+                        <circle class="background" cx="17.8" cy="17.8" r="17.8"></circle>
+                        <circle class="stroke" cx="17.8" cy="17.8" r="14.37"></circle>
+                        <polyline class="check" points="11.78 18.12 15.55 22.23 25.17 12.87"></polyline>
+                    </svg>
+                </div>
+                <label for="checkboxCartes">Cartes</label>
+                <div class="buttonZone">
+                    <button id="launchGameButton">LANCER LE JEU</button>
+                </div>
+            </div>
+            <div id="gameBoard" class="game-board">
+            </div>
+            <!-- Nouvelle div à droite -->
+            <div class="rightDiv">
+                <div id="matchZone" class="matchzone">
+                </div>
+                <div class="victory"> 
+                    <span class="message">⭐ Bravo ! Bien joué ⭐</span>
+                </div>
+                <button class="buttonRefresh">Relancer</button>
+            </div>
+        </div>
+</body>
+
+</html>
