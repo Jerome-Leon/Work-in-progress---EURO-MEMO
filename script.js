@@ -148,7 +148,9 @@ function displayMatchedCountry() {
 function createCountryElement(countryName, countryId) {
     const countryElement = document.createElement('div');
     countryElement.classList.add('country');
-    countryElement.textContent = countryName;
+    const spanCountryElement = document.createElement('span');
+    countryElement.appendChild(spanCountryElement);
+    spanCountryElement.textContent = countryName;
     countryElement.dataset.countryId = countryId; // Ajout de l'ID du pays comme attribut data
     return countryElement;
 }

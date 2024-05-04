@@ -68,6 +68,7 @@ h2 {
     width: 100%;
     height: 100%;
     background-image: url(./Images/Fond_europe.webp);
+    -webkit-filter: blur(4px); /* Préfixe pour Chrome/Safari */
     filter: blur(4px);
     /* Ajoute un flou de 5px à l'image de fond */
     opacity: 0.5;
@@ -133,6 +134,7 @@ h2 {
     opacity: 0;
     -appearance: none;
     -webkit-appearance: none;
+    -moz-appearance: none; /* Préfixe pour Firefox */
 }
 
 .stylecheckbox input[type=checkbox]:hover {
@@ -242,11 +244,12 @@ h2 {
     cursor: pointer;
     transition: transform 0.6s ease, scale 1s ease;
     transform-style: preserve-3d;
-    transform: rotateY(180deg);
-    /* Ajout de la rotation initiale */
+    transform: rotateY(180deg); /* Rotation initiale à 180deg pour la face avant */
+    -webkit-transform: rotateY(180deg); /* Pour les anciennes versions de Webkit */
+    -moz-transform: rotateY(180deg); /* Pour Firefox */
+    -ms-transform: rotateY(180deg); /* Pour Internet Explorer */
 }
 
-/* Style pour la face avant des cartes */
 .card::before {
     content: '';
     position: absolute;
@@ -254,13 +257,14 @@ h2 {
     height: 100%;
     backface-visibility: hidden;
     background-color: #f1f1f1;
-    /* Couleur de la face avant */
     border-radius: 10px;
-    transform: rotateY(180deg);
+    transform: rotateY(180deg); /* Rotation pour la face avant */
+    -webkit-transform: rotateY(180deg); /* Pour les anciennes versions de Webkit */
+    -moz-transform: rotateY(180deg); /* Pour Firefox */
+    -ms-transform: rotateY(180deg); /* Pour Internet Explorer */
     transition: transform 0.6s;
 }
 
-/* Style pour la face arrière des cartes */
 .card::after {
     content: '';
     position: absolute;
@@ -268,29 +272,33 @@ h2 {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    background-image: url(./Images/Drp-Europe.png);
-    /* Image de la face arrière */
+    -moz-backface-visibility: hidden;
+    background-image: url(./Images/Drp-Europe.png); /* Image de la face arrière */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 10px;
-    transform: rotateY(0deg);
-    /* Modifier la rotation initiale à 0deg */
+    transform: rotateY(0deg); /* Rotation initiale à 0deg pour la face arrière */
+    -webkit-transform: rotateY(0deg); /* Pour les anciennes versions de Webkit */
+    -moz-transform: rotateY(0deg); /* Pour Firefox */
+    -ms-transform: rotateY(0deg); /* Pour Internet Explorer */
     transition: transform 0.6s ease;
 }
 
-/* Animation pour le retournement des cartes */
 .card.flipped::after {
-    transform: rotateY(-180deg);
-    /* Tourner la carte pour afficher la face arrière */
+    transform: rotateY(-180deg); /* Rotation pour afficher la face arrière */
+    -webkit-transform: rotateY(-180deg); /* Pour les anciennes versions de Webkit */
+    -moz-transform: rotateY(-180deg); /* Pour Firefox */
+    -ms-transform: rotateY(-180deg); /* Pour Internet Explorer */
 }
 
 .card.flipped {
-    transform: rotateY(0deg);
-    /* Tourner la carte pour afficher la face arrière */
+    transform: rotateY(0deg); /* Rotation pour afficher la face arrière */
+    -webkit-transform: rotateY(0deg); /* Pour les anciennes versions de Webkit */
+    -moz-transform: rotateY(0deg); /* Pour Firefox */
+    -ms-transform: rotateY(0deg); /* Pour Internet Explorer */
 }
 
-/* Style pour le contenu de la face avant (le texte ou l'image) */
 .card .front {
     position: absolute;
     display: flex;
@@ -303,48 +311,36 @@ h2 {
     justify-content: center;
     word-wrap: break-word;
     backface-visibility: hidden;
-    /* Cacher la face arrière */
     opacity: 1;
-    /* Rendre la face avant visible */
     visibility: visible;
-    /* Rendre la face avant visible */
 }
 
-/* Style pour l'image dans la face avant */
 .card .front>img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* Ajuster proportionnellement à la taille de la carte */
 }
 
 .card.matched {
     pointer-events: none;
-    /* Empêcher les clics sur les cartes déjà trouvées */
 }
 
-/* Animation pour la rotation complète sur l'axe Z */
 @keyframes rotate360 {
     from {
         transform: rotateY(0deg);
     }
-
     to {
         transform: rotateY(360deg);
     }
 }
 
-/* Appliquer l'animation aux cartes qui correspondent */
 .card.matched {
     pointer-events: none;
     animation: rotate360 .5s linear;
-    /* Durée de l'animation et type d'interpolation */
 }
 
-/* Appliquer l'animation aux cartes qui correspondent */
 .card.matched.animate-match {
     animation: rotate360 .5s linear;
-    /* Durée de l'animation et type d'interpolation */
 }
 
 /* //////////////////// VERIFICATION ZONE //////////////////// */
@@ -378,7 +374,6 @@ h2 {
 
 .country {
     display: flex;
-    color: #152B49;
     font-size: 1.2em;
     font-weight: 400;
     width: 6em;
@@ -393,6 +388,11 @@ h2 {
     transition: box-shadow 1s ease;
 }
 
+.country span {
+    color: #152B49;
+    text-align: center;
+}
+
 .country:hover {
     border-radius: 50%;
     background: #e0e0e0;
@@ -400,16 +400,6 @@ h2 {
     inset -4px -4px 8px #ffffff;
     transition: box-shadow 1s ease;
     background: #f1f1f1;
-}
-
-.country span {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 6em;
-    height: 6em;
-    cursor: pointer;
 }
 
 .country-hover {
@@ -506,4 +496,23 @@ h2 {
     top: -45%;
     background-color: #152B49;
     transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+/* Firefox Specific Styles */
+@-moz-document url-prefix() {
+    .background::before {
+        -moz-filter: blur(4px);
+    }
+
+    .card::before {
+        -moz-transform: rotateY(180deg);
+    }
+
+    .card.flipped {
+        -moz-transform: rotateY(0deg);
+    }
+
+    .card.flipped::after {
+        -moz-transform: rotateY(-180deg);
+    }
 }
