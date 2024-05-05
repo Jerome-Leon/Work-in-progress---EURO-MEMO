@@ -90,9 +90,9 @@ function createAndShuffleCards() {
         selectedCards.push(choice));
     choix2.forEach(choice => selectedCards.push(choice));
     selectedCards.sort(() => Math.random() - 0.5);
-    }
-    
-    // Tableau pour suivre les cartes retournées
+}
+
+// Tableau pour suivre les cartes retournées
 let flippedCards = [];
 
 // Fonction pour vérifier si deux cartes retournées correspondent
@@ -218,7 +218,7 @@ function displayCards() {
 
         // Ajout d'un écouteur d'événement pour retourner la carte au clic
         if (!cardElement.classList.contains('matched')) {
-            cardElement.addEventListener('click', function() {
+            cardElement.addEventListener('click', function () {
                 if (!this.classList.contains('flipped')) {
                     this.classList.toggle('flipped'); // Ajoute ou retire la classe 'flipped' lors du clic
                     handleCardFlip(this);
@@ -237,108 +237,112 @@ launchGameButton.addEventListener('click', function () {
     displayCards();
 });
 
-    // Fonction pour vérifier si un chemin est une image
-    function isImage(path) {
-        return /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(path);
-    }
-    
-    // Fonction pour mettre à jour le compteur et les tableaux
-    function updateCheckboxes() {
-        checkboxesChecked = 0;
-        choix1 = [];
-        choix2 = [];
-        if (checkboxPays.checked) {
-            checkboxesChecked++;
-            if (checkboxesChecked === 1) {
-                randomCountries.forEach(country => choix1.push({ nom: country.nom, id: generateUniqueID(choix1.length) }));
-            } else if (checkboxesChecked === 2) {
-                randomCountries.forEach(country => choix2.push({ nom: country.nom, id: generateUniqueID(choix2.length) }));
-            }
-        }
-        if (checkboxCapitales.checked) {
-            checkboxesChecked++;
-            if (checkboxesChecked === 1) {
-                randomCountries.forEach(country => choix1.push({ nom: country.capitale, id: generateUniqueID(choix1.length) }));
-            } else if (checkboxesChecked === 2) {
-                randomCountries.forEach(country => choix2.push({ nom: country.capitale, id: generateUniqueID(choix2.length) }));
-            }
-        }
-        if (checkboxDrapeaux.checked) {
-            checkboxesChecked++;
-            if (checkboxesChecked === 1) {
-                randomCountries.forEach(country => choix1.push({ nom: country.drapeau, id: generateUniqueID(choix1.length) }));
-            } else if (checkboxesChecked === 2) {
-                randomCountries.forEach(country => choix2.push({ nom: country.drapeau, id: generateUniqueID(choix2.length) }));
-            }
-        }
-        if (checkboxCartes.checked) {
-            checkboxesChecked++;
-            if (checkboxesChecked === 1) {
-                randomCountries.forEach(country => choix1.push({ nom: country.image, id: generateUniqueID(choix1.length) }));
-            } else if (checkboxesChecked === 2) {
-                randomCountries.forEach(country => choix2.push({ nom: country.image, id: generateUniqueID(choix2.length) }));
-            }
-        }
-        if (checkboxesChecked === 2) {
-            launchGameButton.style.display = 'block';
-            disableRemainingCheckboxes([checkboxPays, checkboxCapitales, checkboxDrapeaux, checkboxCartes]);
-        } else {
-            launchGameButton.style.display = 'none';
-            enableCheckboxes();
-        }
-    }
-    
-    // Fonction pour désactiver les cases à cocher restantes une fois deux cases cochées
-    function disableRemainingCheckboxes(checkboxes) {
-        checkboxes.forEach(checkbox => {
-            if (!checkbox.checked && checkboxesChecked === 2) {
-                checkbox.disabled = true;
-            }
-        });
-    }
-    
-    // Fonction pour réactiver toutes les cases à cocher
-    function enableCheckboxes() {
-        [checkboxPays, checkboxCapitales, checkboxDrapeaux, checkboxCartes].forEach(checkbox => {
-            checkbox.disabled = false;
-        });
-    }
-    
-    // Écouteurs d'événements pour les cases à cocher
-    checkboxPays.addEventListener('change', updateCheckboxes);
-    checkboxCapitales.addEventListener('change', updateCheckboxes);
-    checkboxDrapeaux.addEventListener('change', updateCheckboxes);
-    checkboxCartes.addEventListener('change', updateCheckboxes);
-    
-    // Appel de la fonction pour initialiser l'état des cases à cocher
-    updateCheckboxes();
+// Fonction pour vérifier si un chemin est une image
+function isImage(path) {
+    return /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(path);
+}
 
-    function checkWin() {
-        const allCards = document.querySelectorAll('.card');
-        const allMatchedCards = document.querySelectorAll('.card.matched');
-        const messageSpan = document.querySelector('.message');
-        const countryElements = document.querySelectorAll('#matchZone .country');
-    
-        if (allCards.length === allMatchedCards.length && countryElements.length === 10) {
-            messageSpan.style.display = 'flex'; // Afficher le message
-        } else {
-            messageSpan.style.display = 'none'; // Cacher le message sinon
+// Fonction pour mettre à jour le compteur et les tableaux
+function updateCheckboxes() {
+    checkboxesChecked = 0;
+    choix1 = [];
+    choix2 = [];
+    if (checkboxPays.checked) {
+        checkboxesChecked++;
+        if (checkboxesChecked === 1) {
+            randomCountries.forEach(country => choix1.push({ nom: country.nom, id: generateUniqueID(choix1.length) }));
+        } else if (checkboxesChecked === 2) {
+            randomCountries.forEach(country => choix2.push({ nom: country.nom, id: generateUniqueID(choix2.length) }));
         }
-    
-        // Afficher les noms des pays correspondants
-        displayMatchedCountry();
     }
-    
-    
-    // Bouton pour lancer le jeu
-    launchGameButton.addEventListener('click', function () {
-        patchCountries = [];
-        randomCountries.forEach(country => {
-            patchCountries.push({ nom: country.nom, id: generateUniqueID(patchCountries.length) });
-        });
-        console.log("Launch game with:");
-        console.log("Choix 1:", choix1);
-        console.log("Choix 2:", choix2);
-        console.log("Patch Countries:", patchCountries);
+    if (checkboxCapitales.checked) {
+        checkboxesChecked++;
+        if (checkboxesChecked === 1) {
+            randomCountries.forEach(country => choix1.push({ nom: country.capitale, id: generateUniqueID(choix1.length) }));
+        } else if (checkboxesChecked === 2) {
+            randomCountries.forEach(country => choix2.push({ nom: country.capitale, id: generateUniqueID(choix2.length) }));
+        }
+    }
+    if (checkboxDrapeaux.checked) {
+        checkboxesChecked++;
+        if (checkboxesChecked === 1) {
+            randomCountries.forEach(country => choix1.push({ nom: country.drapeau, id: generateUniqueID(choix1.length) }));
+        } else if (checkboxesChecked === 2) {
+            randomCountries.forEach(country => choix2.push({ nom: country.drapeau, id: generateUniqueID(choix2.length) }));
+        }
+    }
+    if (checkboxCartes.checked) {
+        checkboxesChecked++;
+        if (checkboxesChecked === 1) {
+            randomCountries.forEach(country => choix1.push({ nom: country.image, id: generateUniqueID(choix1.length) }));
+        } else if (checkboxesChecked === 2) {
+            randomCountries.forEach(country => choix2.push({ nom: country.image, id: generateUniqueID(choix2.length) }));
+        }
+    }
+    if (checkboxesChecked === 2) {
+        launchGameButton.style.display = 'block';
+        disableRemainingCheckboxes([checkboxPays, checkboxCapitales, checkboxDrapeaux, checkboxCartes]);
+    } else {
+        launchGameButton.style.display = 'none';
+        enableCheckboxes();
+    }
+}
+
+// Fonction pour désactiver les cases à cocher restantes une fois deux cases cochées
+function disableRemainingCheckboxes(checkboxes) {
+    checkboxes.forEach(checkbox => {
+        if (!checkbox.checked && checkboxesChecked === 2) {
+            checkbox.disabled = true;
+        }
     });
-    
+}
+
+// Fonction pour réactiver toutes les cases à cocher
+function enableCheckboxes() {
+    [checkboxPays, checkboxCapitales, checkboxDrapeaux, checkboxCartes].forEach(checkbox => {
+        checkbox.disabled = false;
+    });
+}
+
+// Écouteurs d'événements pour les cases à cocher
+checkboxPays.addEventListener('change', updateCheckboxes);
+checkboxCapitales.addEventListener('change', updateCheckboxes);
+checkboxDrapeaux.addEventListener('change', updateCheckboxes);
+checkboxCartes.addEventListener('change', updateCheckboxes);
+
+// Appel de la fonction pour initialiser l'état des cases à cocher
+updateCheckboxes();
+
+function checkWin() {
+    const allCards = document.querySelectorAll('.card');
+    const allMatchedCards = document.querySelectorAll('.card.matched');
+    const messageSpan = document.querySelector('.message');
+    const countryElements = document.querySelectorAll('#matchZone .country');
+
+    if (allCards.length === allMatchedCards.length && countryElements.length === 10) {
+        messageSpan.style.display = 'flex'; // Afficher le message
+    } else {
+        messageSpan.style.display = 'none'; // Cacher le message sinon
+    }
+
+    // Afficher les noms des pays correspondants
+    displayMatchedCountry();
+}
+
+
+// Bouton pour lancer le jeu
+launchGameButton.addEventListener('click', function () {
+    patchCountries = [];
+    randomCountries.forEach(country => {
+        patchCountries.push({ nom: country.nom, id: generateUniqueID(patchCountries.length) });
+    });
+    console.log("Launch game with:");
+    console.log("Choix 1:", choix1);
+    console.log("Choix 2:", choix2);
+    console.log("Patch Countries:", patchCountries);
+});
+
+document.getElementById("buttonRefresh").addEventListener("click", function() {
+    location.reload(); // Rafraîchit la page
+});
+
